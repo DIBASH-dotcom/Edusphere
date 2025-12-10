@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result Checker</title>
+</head>
+<body>
+    <label> Student Name:</label>
+<input type="text" id="Studentname"><br><br>
+
+<label> Course:</label>
+<input type="text"  id="course"><br><br>
+
+<label> Internal Marks:</label>
+<input type="num" id="internalmarks"><br><br>
+
+<label> Final Marks</label>
+<input type="num" id="finalmarks"><br><br>
+
+<label> Attendence</label>
+<input type="num" id="attendence" min="0"><br><br>
+
+<button id="CheckResult">Check Result</button>
+
+<h2> Result</h2>
+<p id="result"></p>
+
+
+<script>
+   document.getElementById("CheckResult").addEventListener("click", () => {
+    let Studentname = document.getElementById("Studentname").value.toUpperCase();
+    let course = document.getElementById("course").value.toUpperCase();
+    let internalmarks =parseFloat(document.getElementById("internalmarks").value);
+    let finalmarks = parseFloat(document.getElementById("finalmarks").value);
+    let attendence =parseInt(document.getElementById("attendence").value);
+
+    let output= "";
+
+    if(!student|| !course || isNaN(internalmarks) ||isNan(finalmarks) || isNan(attendence)) {
+        document.getElementById("result").innerHTML ="Pleasee fill all the fields correctly okay.";
+        return;
+    }
+
+    if(internal<0 ||internal>40 ||finalmarks<0 ||finalmarks>60 ||attendence<0 ||attendence>100) {
+        document.getElementById("result"),innerHTML ="Please enter valid marks and attendence.";
+        return;
+
+        if(attendence<75) {
+            document.getElementById("result").innerHTML= "Fail(Short Attenfence)";
+            return;
+
+        }
+
+        let total =internalmarks+finalmarks;
+
+        let bonus=0;
+
+        if(course==="IT")
+            bonus=5;
+        else if(course==="CS")
+        bonus=4;
+    else if(course==="Civil")
+    bonus=3;
+
+    else {
+    document.getElementById("result").innerHTML="Invaild Course";
+    return;
+    }
+
+    let finalTotal = total +bonus;
+
+    let grade="";
+
+    if (finalTotal >= 90) grade = "A+";
+    else if (finalTotal >= 80) grade = "A";
+    else if (finalTotal >= 70) grade = "B+";
+    else if (finalTotal >= 60) grade = "B";
+    else if (finalTotal >= 50) grade = "C";
+    else grade = "F";
+
+    let finalResult = (grade ==="F") ?"Fail" : "Pass";
+
+    output += `Student Name: ${Studentname}<br>`;
+    output +=`course: ${course}<br>`;
+   
+    output +=`Total (Before Bnus): ${total}<br>`;
+    output +=`Bonus ${bonus}<br>`;
+    output +=` Final Total: ${finalTotal}<br>`;
+    output +=`Grade: ${grade}<br>`;
+    output +=`Final Result: ${finalResult}<br>`;
+    document.getElementById("result").innerHTML =output;
+    }
+   });
+</script>
+
+</body>
+</html>
